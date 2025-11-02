@@ -225,6 +225,16 @@
             font-size: 16px;
         }
 
+        .logo-img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: rotate(360deg) scale(1.1);
+}
+
         /* Responsive navigation */
         @media (max-width: 768px) {
             .card-navigation {
@@ -379,6 +389,14 @@
 </head>
 
 <body class="antialiased">
+
+       window.addEventListener('load', () => {
+        const loadingScreen = document.getElementById('loading-screen');
+       setTimeout(() => {
+    loadingScreen.classList.add('hidden');
+}, 1500); // Shows for 2 seconds
+    });
+
 
     <!-- Navigation -->
     <div class="card-navigation">

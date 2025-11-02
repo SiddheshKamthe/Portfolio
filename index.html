@@ -43,6 +43,107 @@
             overflow-x: hidden;
         }
 
+        /* ✨ ADD THIS: Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    cursor: pointer;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+     pointer-events: none;
+}
+
+.loading-screen::after {
+    content: 'Click anywhere to enter';
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    animation: fadeInUp 0.6s ease 1s backwards, pulse 2s ease-in-out 1.5s infinite;
+}
+
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-logo {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.loading-logo-text {
+    font-size: 4rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: float 3s ease-in-out infinite;
+}
+
+.loading-logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.loading-title {
+    font-size: 2rem;
+    color: var(--text-primary);
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.loading-word {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.loading-word:nth-child(1) { animation-delay: 0.1s; }
+.loading-word:nth-child(2) { animation-delay: 0.2s; }
+.loading-word:nth-child(3) { animation-delay: 0.3s; }
+.loading-word:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        
+
         /* Navigation */
         .navbar {
             position: fixed;
@@ -113,6 +214,31 @@
             color: var(--primary);
         }
 
+
+                .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;  /* ✨ ADD THIS */
+            padding: 0.5rem 0;  /* ✨ ADD THIS */
+             }
+
+        /* ✨ ADD THIS: Underline animation */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -129,6 +255,73 @@
             inset: 0;
             background: radial-gradient(circle at 50% 50%, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
         }
+
+        /* ✨ ADD THIS: Animated grid */
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* ✨ ADD THIS: Floating tech icons */
+.floating-elements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.floating-card {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 191, 255, 0.1);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-card:nth-child(1) {
+    top: 20%;
+    left: 10%;
+}
+
+.floating-card:nth-child(2) {
+    top: 60%;
+    left: 15%;
+    animation-delay: 1s;
+}
+
+.floating-card:nth-child(3) {
+    top: 40%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+.floating-card:nth-child(4) {
+    top: 70%;
+    right: 20%;
+    animation-delay: 1.5s;
+}
+
+.floating-card:nth-child(5) {
+    top: 15%;
+    right: 25%;
+    animation-delay: 0.5s;
+}
 
         .hero-content {
             max-width: 1200px;
@@ -152,7 +345,15 @@
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shimmer 3s ease-in-out infinite;  /* ✨ ADD THIS */
+            background-size: 200% auto;  /* ✨ ADD THIS */
         }
+
+            /* ✨ ADD THIS: Shimmer animation */
+            @keyframes shimmer {
+                0%, 100% { background-position: 0% center; }
+                50% { background-position: 100% center; }
+            }
 
         .hero-subtitle {
             font-size: 1.5rem;
@@ -171,6 +372,32 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+        }
+
+        /* ✨ ADD THIS: Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-line {
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
         }
 
         .btn {
@@ -223,6 +450,21 @@
             border: 3px solid var(--primary);
             box-shadow: 0 20px 60px rgba(0, 191, 255, 0.3);
         }
+
+
+        .image-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
 
         .status-badge {
             position: absolute;
@@ -547,12 +789,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+
+     <!-- ✨ ADD THIS LOADING SCREEN -->
+    <div id="loading-screen" class="loading-screen" onclick="hideLoading()">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-logo-text">Sanjana Chavan</div>
+                <div class="loading-logo-glow"></div>
+            </div>
+            <div class="loading-text">
+                <h1 class="loading-title">
+                    <span class="loading-word">Welcome</span>
+                    <span class="loading-word">to</span>
+                    <span class="loading-word">my</span>
+                    <span class="loading-word">portfolio</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <!-- UPDATE: Your initials or brand name -->
-                SC
+                <!-- SC -->
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
@@ -565,12 +826,23 @@
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
+            <!-- In Navigation -->
+
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-background"></div>
+        <div class="hero-background">
+    <div class="hero-grid"></div>
+    <div class="floating-elements">
+        <div class="floating-card"><i class="fab fa-react"></i></div>
+        <div class="floating-card"><i class="fab fa-node-js"></i></div>
+        <div class="floating-card"><i class="fab fa-js-square"></i></div>
+        <div class="floating-card"><i class="fas fa-database"></i></div>
+        <div class="floating-card"><i class="fas fa-code"></i></div>
+    </div>
+</div>
         <div class="hero-content">
             <div class="hero-text">
                 <h1 class="hero-title">
@@ -593,7 +865,7 @@
                         <i class="fab fa-github"></i>
                     </a>
                     
-                    <a href="your-resume-link-here" class="btn btn-secondary" target="_blank">
+                    <a href="https://docs.google.com/document/d/1M_yOmuSSEY7YBbHK4GJ2Q_csOxCuZZZY/edit?usp=sharing&ouid=109855176915526635704&rtpof=true&sd=true" class="btn btn-secondary" target="_blank">
                         <span>Resume</span>
                         <i class="fa-solid fa-file-lines"></i>
                     </a>
@@ -603,20 +875,30 @@
                         <i class="fa-solid fa-file-lines"></i>
                     </a>
                 </div>
+
             </div>
+
             <div class="hero-image">
                 <div class="image-container">
-                    <!-- UPDATE: Your profile image -->
-                    <img src="assets/ele/Sanjana.jpeg" alt="Your Name" class="profile-image">
-                </div>
-                <div class="status-badge">
-                    <div class="status-indicator"></div>
-                    <!-- UPDATE: Your current status -->
+                      <img src="assets/ele/Sanjana.jpeg" alt="Your Name" class="profile-image">
+                <div class="image-glow"></div>  <!-- ✨ ADD THIS LINE -->
+            </div>
+                            <div class="status-badge">
+                                <div class="status-indicator"></div>
+                                <!-- UPDATE: Your current status -->
 
-                    <span>Open to opportunities</span>
+                                <!-- <span>Open to opportunities</span> -->
+                            </div>
                 </div>
             </div>
-        </div>
+            
+                    <!-- ✨ ADD THIS: Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span>Scroll to explore</span>
+            </div>
+  <!-- This is your existing closing tag -->
+
     </section>
 
     <!-- About Section -->
@@ -760,10 +1042,10 @@
                             <i class="fab fa-github"></i>
                             <span>Code</span>
                         </a>
-                        <a href="#" class="btn btn-secondary" target="_blank">
+                        <!-- <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fas fa-external-link-alt"></i>
                             <span>Live</span>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -773,24 +1055,24 @@
                     <i class="fas fa-robot"></i>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">Project Name 2</h3>
+                    <h3 class="project-title">Leetmetrics</h3>
                     <p class="project-description">
-                        Brief description of what this project does and the problem it solves.
+                        Leetcode score calculator.
                     </p>
                     <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Flask</span>
+                        <span class="tag">Html</span>
+                        <span class="tag">Css</span>
+                        <span class="tag">Js</span>
                     </div>
                     <div class="project-links">
                         <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fab fa-github"></i>
                             <span>Code</span>
                         </a>
-                        <a href="#" class="btn btn-secondary" target="_blank">
+                        <!-- <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fas fa-external-link-alt"></i>
                             <span>Live</span>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div> 
@@ -801,24 +1083,23 @@
                     <i class="fas fa-mobile-alt"></i>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">Project Name 3</h3>
+                    <h3 class="project-title">Expense Tracker</h3>
                     <p class="project-description">
-                        Brief description of what this project does and the problem it solves.
-                    </p>
+                        A user friendly expense tracker to track ur expenses 
                     <div class="project-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">CSS</span>
                         <span class="tag">HTML</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="btn btn-secondary" target="_blank">
+                        <!-- <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fab fa-github"></i>
                             <span>Code</span>
                         </a>
                         <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fas fa-external-link-alt"></i>
                             <span>Live</span>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -914,6 +1195,28 @@
     </footer>
 
     <script>
+
+        const loadingScreen = document.getElementById('loading-screen');
+    let loadingTimeout;
+
+    // Function to hide loading screen
+    function hideLoading() {
+        loadingScreen.classList.add('hidden');
+        clearTimeout(loadingTimeout);
+    }
+
+    // Auto-hide after 3 seconds
+    window.addEventListener('load', () => {
+        loadingTimeout = setTimeout(() => {
+            hideLoading();
+        }, 3000); // 3 seconds
+    });
+
+    // Click anywhere on loading screen to skip
+    // loadingScreen.addEventListener('click', hideLoading);
+    // loadingScreen.addEventListener('mouseenter', hideLoading);
+    loadingScreen.addEventListener('click', hideLoading);
+
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
