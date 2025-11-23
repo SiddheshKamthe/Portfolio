@@ -162,6 +162,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            
         }
 
         .nav-actions {
@@ -237,6 +238,37 @@
 
         .nav-link:hover::after {
             width: 100%;
+        }
+
+
+        .hamburger {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                background: var(--bg-card);
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                width: 150px;
+                padding: 1rem;
+                border-radius: 12px;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
         }
 
         /* Hero Section */
@@ -321,6 +353,12 @@
     top: 15%;
     right: 25%;
     animation-delay: 0.5s;
+}
+
+@media (max-width: 600px) {
+    .floating-card {
+        display: none;
+    }
 }
 
         .hero-content {
@@ -519,6 +557,12 @@
             margin-top: 0.5rem;
         }
 
+        @media (max-width: 600px) {
+        section {
+        padding: 3rem 1rem;
+        }
+        }       
+
         /* About Section - Bento Grid */
         .bento-grid {
             display: grid;
@@ -600,7 +644,7 @@
         /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
@@ -694,6 +738,13 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+                    @media (max-width: 600px) {
+                .contact-card {
+                    margin-bottom: 1rem;
+                }
+            }
+
+
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -763,6 +814,9 @@
                 text-align: center;
             }
 
+             .hero {
+                    padding-top: 7rem;
+            }
             .hero-title {
                 font-size: 2.5rem;
             }
@@ -826,6 +880,9 @@
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </div>
             <!-- In Navigation -->
 
         </div>
@@ -865,7 +922,7 @@
                         <i class="fab fa-github"></i>
                     </a>
                     
-                    <a href="https://docs.google.com/document/d/1M_yOmuSSEY7YBbHK4GJ2Q_csOxCuZZZY/edit?usp=sharing&ouid=109855176915526635704&rtpof=true&sd=true" class="btn btn-secondary" target="_blank">
+                    <!-- <a href="https://docs.google.com/document/d/1M_yOmuSSEY7YBbHK4GJ2Q_csOxCuZZZY/edit?usp=sharing&ouid=109855176915526635704&rtpof=true&sd=true" class="btn btn-secondary" target="_blank">
                         <span>Resume</span>
                         <i class="fa-solid fa-file-lines"></i>
                     </a>
@@ -873,7 +930,7 @@
                      <a href="https://docs.google.com/document/d/1IYlsL9Tjmau8e_UWt9W2nfmJJ_TgT4xroafASXPiDPw/edit?usp=sharing" class="btn btn-secondary" target="_blank">
                         <span>Certificates</span>
                         <i class="fa-solid fa-file-lines"></i>
-                    </a>
+                    </a> -->
                 </div>
 
             </div>
@@ -1038,10 +1095,10 @@
                         <span class="tag">MongoDB</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="btn btn-secondary" target="_blank">
+                        <!-- <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fab fa-github"></i>
                             <span>Code</span>
-                        </a>
+                        </a> -->
                         <!-- <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fas fa-external-link-alt"></i>
                             <span>Live</span>
@@ -1065,10 +1122,10 @@
                         <span class="tag">Js</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="btn btn-secondary" target="_blank">
+                        <!-- <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fab fa-github"></i>
                             <span>Code</span>
-                        </a>
+                        </a> -->
                         <!-- <a href="#" class="btn btn-secondary" target="_blank">
                             <i class="fas fa-external-link-alt"></i>
                             <span>Live</span>
@@ -1085,11 +1142,13 @@
                 <div class="project-content">
                     <h3 class="project-title">Expense Tracker</h3>
                     <p class="project-description">
-                        A user friendly expense tracker to track ur expenses 
+                        A user friendly expense tracker to track ur expenses and predicts Next month expense using ML model - Random Forest
                     <div class="project-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">CSS</span>
                         <span class="tag">HTML</span>
+                        <span class="tag">REACT</span>
+                        <span class="tag">PYTHON ML</span>
                     </div>
                     <div class="project-links">
                         <!-- <a href="#" class="btn btn-secondary" target="_blank">
@@ -1245,6 +1304,11 @@
                 themeIcon.classList.add('fa-moon');
             }
         }
+
+        function toggleMenu() {
+            document.querySelector(".nav-menu").classList.toggle("active");
+        }
+
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
