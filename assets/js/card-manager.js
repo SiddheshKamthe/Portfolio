@@ -48,19 +48,12 @@ class NexusCardManager {
     updateConfig(updates, save = false) {
         this.config = this.deepMerge(this.config, updates);
         this.notifyObservers('update', this.config);
-        
+
         if (save) {
             this.saveConfig();
         }
-        
-        return this.config;
-    }
 
-    /**
-     * Get current configuration
-     */
-    getConfig() {
-        return { ...this.config };
+        return this.config;
     }
 
     /**
@@ -68,6 +61,13 @@ class NexusCardManager {
      */
     updateProfile(profileData) {
         return this.updateConfig({ profile: profileData });
+    }
+
+    /**
+     * Get current configuration
+     */
+    getConfig() {
+        return { ...this.config };
     }
 
     /**
@@ -101,12 +101,12 @@ class NexusCardManager {
     updateSocialLink(platform, updates) {
         const currentLinks = this.config.socialLinks || [];
         const linkIndex = currentLinks.findIndex(link => link.platform === platform);
-        
+
         if (linkIndex !== -1) {
             currentLinks[linkIndex] = { ...currentLinks[linkIndex], ...updates };
             return this.updateConfig({ socialLinks: currentLinks });
         }
-        
+
         return this.config;
     }
 
@@ -116,7 +116,7 @@ class NexusCardManager {
     updateTheme(themeData) {
         const currentProfile = this.config.profile || {};
         const currentCustomization = this.config.customization || {};
-        
+
         return this.updateConfig({
             profile: { ...currentProfile, themeColor: themeData.themeColor },
             customization: { ...currentCustomization, ...themeData }
@@ -298,7 +298,7 @@ class NexusCardManager {
      */
     deepMerge(target, source) {
         const output = { ...target };
-        
+
         if (this.isObject(target) && this.isObject(source)) {
             Object.keys(source).forEach(key => {
                 if (this.isObject(source[key])) {
@@ -312,7 +312,7 @@ class NexusCardManager {
                 }
             });
         }
-        
+
         return output;
     }
 
@@ -353,13 +353,13 @@ class NexusCardManager {
     applyTheme(themeName) {
         const themes = this.getAvailableThemes();
         const theme = themes[themeName];
-        
+
         if (theme) {
             return this.updateTheme({
                 themeColor: theme.color
             });
         }
-        
+
         return this.config;
     }
 

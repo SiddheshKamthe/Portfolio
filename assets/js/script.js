@@ -133,16 +133,16 @@ class PortfolioApp {
             }
         });
 
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => this.toggleTheme());
-        }
-
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         if (mobileMenuToggle) {
             mobileMenuToggle.addEventListener('click', () => this.toggleMobileMenu());
+        }
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => this.toggleTheme());
         }
 
         // Project filters
@@ -231,7 +231,7 @@ class PortfolioApp {
     applyTheme() {
         const themeToggle = document.getElementById('themeToggle');
         const profileImage = document.querySelector('.profile-image');
-        
+
         if (this.isDarkTheme) {
             document.documentElement.removeAttribute('data-theme');
             if (themeToggle) {
@@ -255,7 +255,7 @@ class PortfolioApp {
                 this.switchProfileImage(profileImage, './assets/ele/profile2.jpg', 'Tirth Patel - Developer Illustration (Light Theme)', 'none');
             }
         }
-        
+
         // Store theme preference
         localStorage.setItem('theme', this.isDarkTheme ? 'dark' : 'light');
     }
@@ -263,7 +263,7 @@ class PortfolioApp {
     switchProfileImage(imageElement, newSrc, newAlt, filterStyle = 'none') {
         // Create a smooth cross-fade effect
         imageElement.style.opacity = '0.3';
-        
+
         // Pre-load the new image to ensure smooth transition
         const newImage = new Image();
         newImage.onload = () => {
@@ -271,13 +271,13 @@ class PortfolioApp {
             imageElement.src = newSrc;
             imageElement.alt = newAlt;
             imageElement.style.filter = filterStyle;
-            
+
             // Fade back in
             setTimeout(() => {
                 imageElement.style.opacity = '1';
             }, 150);
         };
-        
+
         newImage.onerror = () => {
             // Fallback: if image fails to load, just fade back to original
             console.warn(`Failed to load profile image: ${newSrc}`);
@@ -285,7 +285,7 @@ class PortfolioApp {
                 imageElement.style.opacity = '1';
             }, 150);
         };
-        
+
         // Start loading the new image
         newImage.src = newSrc;
     }
@@ -1258,7 +1258,7 @@ class PortfolioApp {
             // Remove any existing event listeners to prevent conflicts
             const newCard = card.cloneNode(true);
             card.parentNode.replaceChild(newCard, card);
-            
+
             // Add event listeners to the new card
             newCard.addEventListener('mouseenter', () => {
                 newCard.style.transition = 'transform all 400ms ease-in-out';
